@@ -61,6 +61,7 @@ public class UserController : ControllerBase
 
     // POST: api/User
     [HttpPost]
+    [Authorize(Roles= "Admin")]
     public async Task<ActionResult<UserDto>> CreateUser([FromBody] CreateUserDto createDto)
     {
         // Map DTO to User entity
@@ -90,7 +91,7 @@ public class UserController : ControllerBase
 
     // PUT: api/User/5
     [HttpPut("{id}")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult<UserDto>> UpdateUser(int id, [FromBody] UpdateUserDto updateDto)
     {
         // Map DTO to User entity
@@ -122,7 +123,7 @@ public class UserController : ControllerBase
 
     // DELETE: api/User/5
     [HttpDelete("{id}")]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public async Task<ActionResult> DeleteUser(int id)
     {
         var result = await _userService.DeleteUserAsync(id);
